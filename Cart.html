@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Košík – UltraShop 4.0</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #0D0D0D;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00C2FF;
+      text-shadow: 0 0 15px #00C2FF;
+    }
+
+    .item {
+      padding: 15px;
+      background: #181818;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    button {
+      padding: 10px;
+      margin-top: 20px;
+      background: #00C2FF;
+      border: none;
+      color: black;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🛒 Tvoj košík</h1>
+
+<div id="list"></div>
+
+<h2>Spolu: <span id="total">0</span> €</h2>
+
+<button onclick="checkout()">Odoslať objednávku</button>
+<button onclick="clearCart()">Vymazať košík</button>
+
+<script>
+  function loadCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let list = document.getElementById("list");
+    let total = 0;
+    list.innerHTML = "";
+
+    cart.forEach((item, i) => {
+      total += item.price;
+      list.innerHTML += `
+        <div class="item">
+          <b>${item.name}</b> – ${item.price} €
+          <button onclick="removeItem(${i})">Vymazať</button>
+        </div>
+      `;
+    });
+
+    document.getElementById("total").textContent = total;
+  }
+
+  function removeItem(i) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(i, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+  }
+
+  function clearCart() {
+    localStorage.removeItem("cart");
+    loadCart();
+  }
+
+  function checkout() {
+    window.location.href = "mailto:tvojmail@gmail.com?subject=Objednávka&body=Objednávam produkty...";
+  }
+
+  loadCart();
+</script>
+
+</body>
+</html>
