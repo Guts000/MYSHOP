@@ -1,207 +1,178 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 Neon E-Shop PRO</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UltraShop 4.0</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: #0F0F0F;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
 
-    <style>
-        body {
-            margin: 0;
-            background: linear-gradient(135deg, #0d0d0d, #101820);
-            font-family: 'Montserrat', sans-serif;
-            color: white;
-            overflow-x: hidden;
-        }
+    header {
+      padding: 20px;
+      background: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px #000;
+    }
 
-        header {
-            padding: 25px;
-            text-align: center;
-            font-size: 40px;
-            font-weight: bold;
-            letter-spacing: 3px;
-            color: #00eaff;
-            text-shadow: 0 0 20px #00eaff;
-            border-bottom: 2px solid rgba(255,255,255,0.1);
-        }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+      color: #00C2FF;
+      text-shadow: 0 0 10px #00C2FF;
+    }
 
-        .hero {
-            text-align: center;
-            padding: 60px 20px;
-        }
+    header a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      background: #00C2FF;
+      padding: 8px 15px;
+      border-radius: 8px;
+      transition: .2s;
+    }
 
-        .hero h1 {
-            font-size: 50px;
-            color: #00d0ff;
-            text-shadow: 0 0 30px #00d0ff;
-        }
+    header a:hover {
+      background: #0096CC;
+    }
 
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            padding: 20px;
-        }
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+      background: url("https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1600&q=80") center/cover;
+      background-blend-mode: overlay;
+      background-color: rgba(0,0,0,0.5);
+    }
 
-        .product {
-            width: 300px;
-            background: rgba(25,25,25,0.85);
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 0 20px #000;
-            transition: .3s;
-            backdrop-filter: blur(10px);
-        }
+    .hero h2 {
+      font-size: 50px;
+      margin: 0;
+      text-shadow: 0 0 20px #00C2FF;
+    }
 
-        .product:hover {
-            transform: scale(1.04);
-            box-shadow: 0 0 30px #008cff;
-        }
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      gap: 20px;
+    }
 
-        .product img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 12px;
-        }
+    .product {
+      width: 300px;
+      background: #181818;
+      padding: 15px;
+      border-radius: 15px;
+      transition: .2s;
+      box-shadow: 0 0 15px #000;
+    }
 
-        .product h3 {
-            color: #00c0ff;
-            margin-top: 10px;
-        }
+    .product:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 20px #00C2FF;
+    }
 
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            background: #00aaff;
-            color: black;
-            border-radius: 8px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: .2s;
-        }
+    .product img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
 
-        .btn:hover {
-            background: #0088cc;
-            box-shadow: 0 0 15px #00aaff;
-        }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: #00C2FF;
+      border: none;
+      color: black;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: .2s;
+      margin-top: 10px;
+    }
 
-        #cartBox {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 330px;
-            background: rgba(20,20,20,0.95);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 25px #000;
-        }
+    .btn:hover {
+      background: #0096CC;
+    }
 
-        #cartBox h2 {
-            text-align: center;
-            text-shadow: 0 0 10px #00eaff;
-        }
-
-        #cartItems li {
-            list-style: none;
-            padding: 5px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        @media (max-width: 900px) {
-            #cartBox {
-                position: static;
-                margin: 20px auto;
-            }
-        }
-    </style>
+    #note {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00C2FF;
+      padding: 15px;
+      border-radius: 10px;
+      display: none;
+      color: black;
+      font-weight: bold;
+      box-shadow: 0 0 20px #00C2FF;
+    }
+  </style>
 </head>
+
 <body>
 
-<header>⚡ MEGA NEON E-SHOP PRO</header>
+<header>
+  <h1>UltraShop 4.0</h1>
+  <a href="cart.html">🛒 Košík</a>
+</header>
 
 <div class="hero">
-    <h1>Limitované kolekcie – len pre teba</h1>
-    <p>Streetwear • Gaming gear • LED • Hype merch</p>
+  <h2>Najlepší e-shop, čo si kedy mal</h2>
 </div>
 
-<div class="container">
+<div class="products">
 
-    <div class="product">
-        <img src="https://images.unsplash.com/photo-1602810320073-123f44e6b1c9?auto=format&fit=crop&w=800&q=80">
-        <h3>🔥 Black Hoodie</h3>
-        <p>Cena: <b>29 €</b></p>
-        <button class="btn" onclick="addToCart('Black Hoodie', 29)">Pridať do košíka</button>
-    </div>
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1602810312871-d2545ace8985?auto=format&fit=crop&w=800&q=80">
+    <h3>Black Hoodie</h3>
+    <p>29 €</p>
+    <button class="btn" onclick="add('Black Hoodie', 29)">Pridať do košíka</button>
+  </div>
 
-    <div class="product">
-        <img src="https://images.unsplash.com/photo-1580894732444-8ecdedc93a6c?auto=format&fit=crop&w=800&q=80">
-        <h3>🎧 Gaming Headset</h3>
-        <p>Cena: <b>49 €</b></p>
-        <button class="btn" onclick="addToCart('Gaming Headset', 49)">Pridať do košíka</button>
-    </div>
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1580894732444-8ecdedc93a6c?auto=format&fit=crop&w=800&q=80">
+    <h3>Gaming Headset</h3>
+    <p>49 €</p>
+    <button class="btn" onclick="add('Gaming Headset', 49)">Pridať do košíka</button>
+  </div>
 
-    <div class="product">
-        <img src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=800&q=80">
-        <h3>🧢 Street Cap</h3>
-        <p>Cena: <b>19 €</b></p>
-        <button class="btn" onclick="addToCart('Street Cap', 19)">Pridať do košíka</button>
-    </div>
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=800&q=80">
+    <h3>Street Cap</h3>
+    <p>19 €</p>
+    <button class="btn" onclick="add('Street Cap', 19)">Pridať do košíka</button>
+  </div>
 
-    <div class="product">
-        <img src="https://images.unsplash.com/photo-1604017011836-b43f57efb5de?auto=format&fit=crop&w=800&q=80">
-        <h3>💡 RGB LED Lights</h3>
-        <p>Cena: <b>35 €</b></p>
-        <button class="btn" onclick="addToCart('RGB LED Lights', 35)">Pridať do košíka</button>
-    </div>
-
-    <div class="product">
-        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80">
-        <h3>🧥 Premium Jacket</h3>
-        <p>Cena: <b>59 €</b></p>
-        <button class="btn" onclick="addToCart('Premium Jacket', 59)">Pridať do košíka</button>
-    </div>
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1604017011836-b43f57efb5de?auto=format&fit=crop&w=800&q=80">
+    <h3>RGB LED Lights</h3>
+    <p>35 €</p>
+    <button class="btn" onclick="add('RGB LED Lights', 35)">Pridať do košíka</button>
+  </div>
 
 </div>
 
-<div id="cartBox">
-    <h2>🛒 Košík</h2>
-    <ul id="cartItems"></ul>
-    <p>Spolu: <b><span id="total">0</span> €</b></p>
-    <button class="btn" onclick="sendOrder()">Odoslať objednávku</button>
-</div>
+<div id="note">Pridané do košíka!</div>
 
 <script>
-    let cart = [];
-    let total = 0;
+  function add(name, price) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({ name, price });
+    localStorage.setItem("cart", JSON.stringify(cart));
 
-    function addToCart(name, price) {
-        cart.push({ name, price });
-        total += price;
-        updateCart();
-    }
-
-    function updateCart() {
-        const list = document.getElementById("cartItems");
-        list.innerHTML = "";
-        cart.forEach(item => {
-            let li = document.createElement("li");
-            li.textContent = `${item.name} — ${item.price} €`;
-            list.appendChild(li);
-        });
-        document.getElementById("total").textContent = total;
-    }
-
-    function sendOrder() {
-        let text = cart.map(i => `${i.name} (${i.price}€)`).join(", ");
-        let mail = `mailto:tvojmail@gmail.com?subject=Objednávka&body=Objednávam: ${text}. Spolu: ${total} €`;
-        window.location.href = mail;
-    }
+    let note = document.getElementById("note");
+    note.style.display = "block";
+    setTimeout(() => note.style.display = "none", 1500);
+  }
 </script>
 
 </body>
