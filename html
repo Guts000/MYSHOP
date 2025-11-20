@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <title>Mega E-shop 💥</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #111;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        header {
+            background: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            box-shadow: 0 0 10px #000;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .product {
+            background: #222;
+            width: 280px;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #000;
+            transition: 0.2s;
+        }
+
+        .product:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 20px #333;
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product h3 {
+            margin-bottom: 5px;
+            color: #4dc6ff;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #00aaff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #0088cc;
+        }
+
+        #cartBox {
+            background: #1b1b1b;
+            width: 350px;
+            padding: 20px;
+            border-radius: 10px;
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            box-shadow: 0 0 15px black;
+        }
+
+        #cartItems li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>Mega E-shop ⚡</header>
+
+<div class="container">
+
+    <!-- PRODUKT 1 -->
+    <div class="product">
+        <img src="https://i.imgur.com/4ZQZ4Zm.jpeg" alt="Produkt">
+        <h3>Hype Hoodie</h3>
+        <p>Cena: 29 €</p>
+        <button class="btn" onclick="addToCart('Hype Hoodie', 29)">Pridať do košíka</button>
+    </div>
+
+    <!-- PRODUKT 2 -->
+    <div class="product">
+        <img src="https://i.imgur.com/Eu7d303.jpeg" alt="Produkt">
+        <h3>RGB Slúchadlá</h3>
+        <p>Cena: 49 €</p>
+        <button class="btn" onclick="addToCart('RGB Slúchadlá', 49)">Pridať do košíka</button>
+    </div>
+
+    <!-- PRODUKT 3 -->
+    <div class="product">
+        <img src="https://i.imgur.com/MLHkZz2.jpeg" alt="Produkt">
+        <h3>Limitovaná čiapka</h3>
+        <p>Cena: 19 €</p>
+        <button class="btn" onclick="addToCart('Čiapka', 19)">Pridať do košíka</button>
+    </div>
+
+</div>
+
+<div id="cartBox">
+    <h2>🛒 Košík</h2>
+    <ul id="cartItems"></ul>
+    <p>Spolu: <span id="total">0</span> €</p>
+    <button class="btn" onclick="sendOrder()">Objednať</button>
+</div>
+
+<script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        total += price;
+        updateCart();
+    }
+
+    function updateCart() {
+        const list = document.getElementById("cartItems");
+        list.innerHTML = "";
+        cart.forEach(item => {
+            let li = document.createElement("li");
+            li.textContent = `${item.name} - ${item.price} €`;
+            list.appendChild(li);
+        });
+        document.getElementById("total").textContent = total;
+    }
+
+    function sendOrder() {
+        let text = cart.map(i => `${i.name} (${i.price}€)`).join(", ");
+        let mail = `mailto:tvojmail@gmail.com?subject=Objednávka&body=Objednávam: ${text}. Spolu: ${total} €`;
+        window.location.href = mail;
+    }
+</script>
+
+</body>
+</html>
